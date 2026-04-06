@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id                  String    @id @default(cuid())
+  name                String
+  whatsappName        String?
+  primaryPosition     String    // GK, DEF, MID, FWD
+  secondaryPosition   String?   // GK, DEF, MID, FWD
+  foot                String?   // LEFT, RIGHT, BOTH
+  isActive            Boolean   @default(true)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  matchPlayers        MatchPlayer[]
+
+  @@index([isActive])
+  @@index([primaryPosition])
+}
+
+model Match {
+  id          String   @id @default(cuid())
+  date        DateTime
+  opponent    String
+  pitchName   String?
+  sideSize    Int      // 5-12
+  isComplete  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  matchPlayers MatchPlayer[]
+
+  @@index([date])
+  @@index([isComplete])
+}
+
+model MatchPlayer {
+  id               String     @id @default(cuid())
+  matchId          String
+  playerId         String
+  
+  // Availability and team assignment
+  isAvailable      Boolean    @default(true)
+  played           Boolean    @default(false)
+  team             String?    // WHITE or BLACK
+  minutes          Int?       @default(90)
+  
+  // Stats
+  goals            Int        @default(0)
+  assists          Int        @default(0)
+  defensiveActions Int        @default(0)
+  motmVotes        Int        @default(0)
+  
+  // Team goal difference while player was on pitch
+  teamGD           Int?       @default(0)
+  
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  match   Match   @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  player  Player  @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@unique([matchId, playerId])
+  @@index([matchId])
+  @@index([playerId])
+  @@index([isAvailable])
+}
