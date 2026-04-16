@@ -127,6 +127,9 @@ export default function ClientMatchPage({ match, availablePlayers, matchId }: Cl
             onGenerateTeams={handleGenerateTeams}
             copied={copied}
             onCopy={handleCopyToClipboard}
+            matchDate={match.date}
+            opponent={match.opponent}
+            pitchName={match.pitchName}
           />
         )}
 
