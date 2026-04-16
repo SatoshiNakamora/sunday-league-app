@@ -14,16 +14,16 @@
     "test": "vitest"
   },
   "dependencies": {
-    "next": "14.2.5",
+    "@prisma/client": "^5.16.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
+    "lucide-react": "^0.400.0",
+    "next": "^14.2.35",
+    "prisma": "^5.16.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@prisma/client": "^5.16.1",
-    "prisma": "^5.16.1",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^2.3.0",
-    "lucide-react": "^0.400.0",
-    "date-fns": "^3.6.0",
-    "recharts": "^2.12.7"
+    "recharts": "^2.12.7",
+    "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
@@ -31,11 +31,11 @@
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.5",
+    "eslint-config-next": "^16.2.4",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
     "tsx": "^4.15.7",
     "typescript": "^5.5.2",
-    "vitest": "^1.6.0"
+    "vitest": "^4.1.4"
   }
 }
